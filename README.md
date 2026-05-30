@@ -27,4 +27,4 @@ Bu proje, sıfır dış bağımlılık (Vanilla HTML, CSS, JS) prensibiyle, üst
 
 ---
 
-<img width="634" height="1312" alt="resim" src="https://github.com/user-attachments/assets/a6b62cda-0ca3-4479-a2ea-337673dd0b1a" />
+  <img width="634" height="1312" alt="resim" src="https://github.com/user-attachments/assets/a6b62cda-0ca3-4479-a2ea-337673dd0b1a" />
