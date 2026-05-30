@@ -1,0 +1,12 @@
+{
+  "name": "anisphere",
+  "version": "1.0.0",
+  "description": "AniSphere - Anime Takip Web Uygulaması",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -p 3000"
+  },
+  "keywords": ["anime", "tracker", "watchlist"],
+  "author": "",
+  "license": "ISC"
+}

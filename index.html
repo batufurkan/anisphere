@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AniSphere - İzlediğiniz animeleri takip edin, bölüm durumlarını güncelleyin ve izleme listenizi yönetin.">
+    <title>AniSphere | Anime Takip & İzleme Listesi</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- SVG Icon Sprite Library -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="icon-plus" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14"/>
+        </symbol>
+        <symbol id="icon-search" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </symbol>
+        <symbol id="icon-edit" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </symbol>
+        <symbol id="icon-trash" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+        </symbol>
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42"/>
+        </symbol>
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </symbol>
+        <symbol id="icon-tv" viewBox="0 0 24 24">
+            <rect width="20" height="15" x="2" y="3" stroke="currentColor" stroke-width="2" rx="2"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 18v4m-4 0h8M8 21h8"/>
+        </symbol>
+        <symbol id="icon-check-circle" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
+            <rect width="18" height="18" x="3" y="4" stroke="currentColor" stroke-width="2" rx="2"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16 2v4M8 2v4M3 10h18"/>
+        </symbol>
+        <symbol id="icon-star" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.969 0 1.371 1.24.588 1.81l-3.97 2.885a1 1 0 00-.364 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.971-2.885a1 1 0 00-1.175 0l-3.97 2.885c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118l-3.97-2.885c-.783-.57-.38-1.81.588-1.81h4.906a1 1 0 00.95-.69l1.519-4.674z"/>
+        </symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </symbol>
+        <symbol id="icon-upload" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+        </symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.03 1.003.9 1.531 2.341 1.088 2.91.832.092-.656.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.479C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+        </symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </symbol>
+        <symbol id="icon-discord" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 01-1.873-.894.077.077 0 01-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 01.077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 01.078.009c.12.099.246.195.373.289a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.894.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z"/>
+        </symbol>
+    </svg>
+
+    <!-- Header Navbar -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area" onclick="handleLogoClick()" style="cursor: pointer;" title="Geliştirici Sürprizi için 5 Kez Tıklayın!">
+                <span class="logo-icon">✨</span>
+                <h1 class="logo-text">Ani<span>Sphere</span></h1>
+            </div>
+            
+            <div class="header-actions">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle-btn" class="icon-btn" aria-label="Tema Değiştir">
+                    <svg class="icon icon-sun"><use href="#icon-sun"></use></svg>
+                    <svg class="icon icon-moon"><use href="#icon-moon"></use></svg>
+                </button>
+                
+                <!-- Backup Menu Trigger -->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-trigger" id="backup-menu-btn">
+                        <svg class="icon"><use href="#icon-download"></use></svg>
+                        <span>Veri Yönetimi</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button id="export-data-btn" class="dropdown-item">
+                            <svg class="icon"><use href="#icon-download"></use></svg> Verileri Yedekle (.json)
+                        </button>
+                        <label for="import-data-file" class="dropdown-item file-label">
+                            <svg class="icon"><use href="#icon-upload"></use></svg> Yedeği Geri Yükle
+                            <input type="file" id="import-data-file" accept=".json" style="display: none;">
+                        </label>
+                        <button id="clear-data-btn" class="dropdown-item danger-item" style="color: var(--status-dropped); border-top: 1px solid var(--border-color);">
+                            <svg class="icon"><use href="#icon-trash"></use></svg> Tüm Verileri Sıfırla
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add Anime Button -->
+                <button id="add-anime-btn" class="btn btn-primary">
+                    <svg class="icon"><use href="#icon-plus"></use></svg>
+                    <span>Anime Ekle</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- Cinematic Hero Banner -->
+        <section id="hero-banner-container" class="hero-banner-section" style="display: none;">
+            <!-- Rendered dynamically by JS -->
+        </section>
+
+        <!-- Dashboard Statistics -->
+        <section class="dashboard-stats" id="dashboard-section">
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <svg class="icon"><use href="#icon-tv"></use></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Toplam Anime</span>
+                    <span class="stat-value" id="stat-total-anime">0</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <svg class="icon"><use href="#icon-check-circle"></use></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Tamamlananlar</span>
+                    <span class="stat-value" id="stat-completed">0</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <svg class="icon"><use href="#icon-calendar"></use></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">İzleniyor</span>
+                    <span class="stat-value" id="stat-watching">0</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon yellow">
+                    <svg class="icon"><use href="#icon-star"></use></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Ortalama Puan</span>
+                    <span class="stat-value" id="stat-avg-rating">0.0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Visual Stats Section -->
+        <section class="advanced-stats-panel" id="advanced-stats-section">
+            <div class="advanced-stats-card chart-card">
+                <h3 class="panel-subtitle">İzleme Durumu Dağılımı</h3>
+                <div class="chart-container">
+                    <div class="svg-container">
+                        <svg class="doughnut-chart" id="status-doughnut-chart" viewBox="0 0 42 42">
+                            <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="transparent"></circle>
+                            <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="var(--border-color)" stroke-width="3"></circle>
+                            <!-- Dynamic segments will be drawn here -->
+                        </svg>
+                        <div class="chart-center-text">
+                            <span class="chart-center-val" id="chart-total-count">0</span>
+                            <span class="chart-center-lbl">Seri</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend" id="chart-legend">
+                        <!-- Will be dynamically populated with legend items -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-stats-card duration-card">
+                <h3 class="panel-subtitle">İzleme Süresi & Türler</h3>
+                <div class="duration-display">
+                    <span class="duration-icon">⌛</span>
+                    <div class="duration-details">
+                        <div class="duration-value" id="stat-total-duration">0 gün, 0 saat</div>
+                        <div class="duration-sub">Bölüm başına ortalama 24 dakika baz alınmıştır.</div>
+                    </div>
+                </div>
+                
+                <div class="genres-ranking-title">En Çok İzlenen Türler</div>
+                <div class="genres-ranking" id="genres-ranking-list">
+                    <!-- Will be dynamically populated with top genres bars -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Genre Explorer Grid (Inspired by Deokwave.com) -->
+        <section class="genre-explore-section" id="genre-explore-section">
+            <button class="genre-explore-card action-grad" data-genre="Aksiyon">
+                <span class="genre-explore-icon">💥</span>
+                <span class="genre-explore-name">Aksiyon</span>
+            </button>
+            <button class="genre-explore-card adventure-grad" data-genre="Macera">
+                <span class="genre-explore-icon">🎒</span>
+                <span class="genre-explore-name">Macera</span>
+            </button>
+            <button class="genre-explore-card fantasy-grad" data-genre="Fantezi">
+                <span class="genre-explore-icon">🔮</span>
+                <span class="genre-explore-name">Fantezi</span>
+            </button>
+            <button class="genre-explore-card drama-grad" data-genre="Dram">
+                <span class="genre-explore-icon">🎭</span>
+                <span class="genre-explore-name">Dram</span>
+            </button>
+            <button class="genre-explore-card mystery-grad" data-genre="Gizem">
+                <span class="genre-explore-icon">🕵️</span>
+                <span class="genre-explore-name">Gizem</span>
+            </button>
+        </section>
+
+        <!-- Search and Filters Area -->
+        <section class="controls-panel">
+            <div class="search-row" style="display: flex; gap: 12px; align-items: center; width: 100%;">
+                <div class="search-box" style="flex-grow: 1; position: relative;">
+                    <svg class="search-icon"><use href="#icon-search"></use></svg>
+                    <input type="text" id="search-input" placeholder="İzleme listenizde arayın..." autocomplete="off">
+                </div>
+                <button id="favorite-filter-btn" class="icon-btn" title="Sadece Favoriler" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: var(--border-radius-md);">
+                    <svg class="icon"><use href="#icon-star"></use></svg>
+                </button>
+            </div>
+
+            <div class="filters-container">
+                <button class="filter-tab active" data-status="all">Tümü <span class="badge" id="badge-all">0</span></button>
+                <button class="filter-tab" data-status="watching">İzleniyor <span class="badge" id="badge-watching">0</span></button>
+                <button class="filter-tab" data-status="completed">Tamamlandı <span class="badge" id="badge-completed">0</span></button>
+                <button class="filter-tab" data-status="plan-to-watch">İzleyeceğim <span class="badge" id="badge-plan-to-watch">0</span></button>
+                <button class="filter-tab" data-status="on-hold">Beklemede <span class="badge" id="badge-on-hold">0</span></button>
+                <button class="filter-tab" data-status="dropped">Bırakıldı <span class="badge" id="badge-dropped">0</span></button>
+            </div>
+        </section>
+
+        <!-- Anime List Grid -->
+        <section class="anime-list-section">
+            <div id="empty-state" class="empty-state">
+                <div class="empty-illustration">🪐</div>
+                <h3>Burada henüz bir şey yok...</h3>
+                <p>Listenize ilk animeyi eklemek için sağ üstteki butonla başlayın veya arama sorgunuzu temizleyin.</p>
+                <button id="empty-add-btn" class="btn btn-secondary">İlk Animenizi Ekleyin</button>
+            </div>
+            
+            <div id="anime-grid" class="anime-grid">
+                <!-- Anime Cards will be dynamically injected here -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Premium Modern Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="footer-logo">✨</span>
+                <span class="footer-brand-text">Ani<span>Sphere</span></span>
+            </div>
+            
+            <p class="footer-copyright">
+                &copy; 2026 AniSphere. Tüm Hakları Saklıdır. <span class="creator-name" onclick="openDevModal()" style="cursor: pointer;">Furkan Batu</span> tarafından sevgiyle geliştirildi.
+            </p>
+            
+            <div class="footer-socials">
+                <a href="https://github.com/batufurkan" target="_blank" class="social-link" aria-label="GitHub" title="GitHub">
+                    <svg class="icon"><use href="#icon-github"></use></svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Twitter" title="Twitter/X">
+                    <svg class="icon"><use href="#icon-twitter"></use></svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Discord" title="Discord">
+                    <svg class="icon"><use href="#icon-discord"></use></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Form (Add / Edit Anime) -->
+    <div id="anime-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 id="modal-title">Yeni Anime Ekle</h2>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            
+            <form id="anime-form" class="modal-form">
+                <input type="hidden" id="anime-id-field">
+
+                <!-- API Search Area -->
+                <div class="form-group search-api-group" id="api-search-container">
+                    <label for="api-search-input">Veritabanında Ara (Hızlı Doldur)</label>
+                    <div class="api-search-wrapper">
+                        <svg class="api-search-icon"><use href="#icon-search"></use></svg>
+                        <input type="text" id="api-search-input" placeholder="MyAnimeList veritabanında arayın... (örn: Bleach, Naruto)" autocomplete="off">
+                        <div class="spinner" id="api-search-spinner" style="display: none;"></div>
+                        <div class="api-results-dropdown" id="api-results-dropdown" style="display: none;">
+                            <!-- Results items will be rendered here dynamically -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-divider" id="api-search-divider"></div>
+                
+                <div class="form-group">
+                    <label for="anime-name-input">Anime Adı *</label>
+                    <input type="text" id="anime-name-input" required placeholder="Örn: Attack on Titan, Demon Slayer...">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="anime-status-select">İzleme Durumu</label>
+                        <select id="anime-status-select">
+                            <option value="watching">İzleniyor</option>
+                            <option value="completed">Tamamlandı</option>
+                            <option value="plan-to-watch">İzleyeceğim</option>
+                            <option value="on-hold">Beklemede</option>
+                            <option value="dropped">Bırakıldı</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="anime-genre-input">Tür / Kategori</label>
+                        <input type="text" id="anime-genre-input" placeholder="Örn: Aksiyon, Shonen (Virgülle ayırın)">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="anime-current-ep">İzlenen Bölüm</label>
+                        <input type="number" id="anime-current-ep" min="0" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="anime-total-ep">Toplam Bölüm</label>
+                        <input type="number" id="anime-total-ep" min="0" value="12" placeholder="Bilinmiyorsa 0 bırakın">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="anime-rating-range">Puanınız (1 - 10)</label>
+                        <div class="rating-slider-container">
+                            <input type="range" id="anime-rating-range" min="0" max="10" step="0.5" value="0">
+                            <span id="rating-val-display" class="rating-display">Puan Yok</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="anime-image-input">Kapak Görseli URL</label>
+                        <input type="url" id="anime-image-input" placeholder="https://resim-adresi.com/resim.jpg">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="anime-notes-input">Kişisel Notlar</label>
+                    <textarea id="anime-notes-input" rows="3" placeholder="Bu anime hakkında ne düşünüyorsunuz? En sevdiğiniz karakter kim?"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="modal-cancel-btn">Vazgeç</button>
+                    <button type="submit" class="btn btn-primary" id="modal-submit-btn">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="image-lightbox" class="lightbox-overlay">
+        <span class="lightbox-close" id="lightbox-close-btn">&times;</span>
+        <div class="lightbox-wrapper">
+            <img class="lightbox-content" id="lightbox-img" alt="Anime Poster Full">
+            <div class="lightbox-details">
+                <h2 id="lightbox-caption" class="lightbox-caption"></h2>
+                <div class="lightbox-notes-label">Kişisel Notlar</div>
+                <p id="lightbox-notes" class="lightbox-notes"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Developer Info Modal -->
+    <div id="dev-modal" class="modal-overlay">
+        <div class="modal-card dev-modal-card">
+            <div class="modal-header">
+                <h2>Geliştirici Hakkında</h2>
+                <button class="modal-close" id="dev-modal-close-btn">&times;</button>
+            </div>
+            <div class="dev-modal-body">
+                <div class="dev-avatar-container">
+                    <img class="dev-avatar" src="https://github.com/batufurkan.png" alt="Furkan Batu" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23ffffff%27><text x=%2750%%27 y=%2750%%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-size=%2712%27>🖥️</text></svg>';">
+                    <div class="dev-avatar-glow"></div>
+                </div>
+                <h3 class="dev-name">Furkan Batu</h3>
+                <p class="dev-title">Full-Stack Developer & Anime Enthusiast</p>
+                <div class="dev-bio">
+                    AniSphere Tracker uygulamasının arkasındaki beyin! Sıfır dış bağımlılıkla modern web teknolojilerini harmanlayarak, kullanıcı dostu premium tasarımlar geliştiriyor.
+                </div>
+                <div class="dev-skills">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">UX/UI Design</span>
+                    <span class="skill-tag">Performance</span>
+                </div>
+                <div class="dev-footer-links">
+                    <a href="https://github.com/batufurkan" target="_blank" class="btn btn-secondary dev-btn">
+                        <svg class="icon"><use href="#icon-github"></use></svg> GitHub Profilim
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
